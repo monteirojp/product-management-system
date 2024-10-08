@@ -17,12 +17,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login", "/static/**").permitAll() // Permite acesso à página de login e recursos estáticos
-                        .anyRequest().authenticated() // Qualquer outra requisição precisa de autenticação
+                        .requestMatchers("/login", "/static/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")  // Define a URL da página de login
-                        .defaultSuccessUrl("/products/list", true)  // Redireciona após login bem-sucedido
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/products/list", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
