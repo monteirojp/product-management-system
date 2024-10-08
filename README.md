@@ -60,7 +60,7 @@ src
 - Clone the Repository:
 
 ```bash
-git clone https://github.com/yourusername/product-management-system.git
+git clone https://github.com/monteirojp/product-management-system.git
 ```
 
 - Setup PostgreSQL Database:
