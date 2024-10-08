@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .form-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            margin-left: 5px;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>Product Management</h1>
+
+<div class="form-section">
+    <h2 th:text="${product.id != null ? 'Edit Product' : 'Add New Product'}">Add New Product</h2>
+    <form th:action="${product.id != null} ? '/products/edit/' + ${product.id} : '/products'" th:object="${product}"
+          method="post">
+        <!-- Hidden field for the product ID (only used when editing) -->
+        <input type="hidden" th:if="${product.id != null}" th:value="${product.id}" name="id">
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="${product.name}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" th:value="${product.description}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" th:value="${product.price}" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category.id" required>
+                <option value="">Select a category</option>
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.name}"
+                        th:selected="${product != null and product.category != null and category.id == product.category.id}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="available">Available:</label>
+            <input type="checkbox" id="available" name="available" th:checked="${product != null and product.available}"
+                   value="true">
+        </div>
+
+        <button type="submit" th:text="${product.id != null ? 'Update Product' : 'Add Product'}">Add Product</button>
+    </form>
+</div>
+
+<br>
+
+<table>
+    <tr>
+        <th><a th:href="@{/products/list(sort='name', order=${order == 'asc' ? 'desc' : 'asc'})}">Name</a></th>
+        <th>Description</th>
+        <th><a th:href="@{/products/list(sort='price', order=${order == 'asc' ? 'desc' : 'asc'})}">Price</a></th>
+        <th>Category Path</th>
+        <th>Available</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.category.name}"></td>
+        <td th:text="${product.available ? 'Yes' : 'No'}"></td>
+        <td>
+            <a th:href="@{'/products/edit/' + ${product.id}}">Edit</a> |
+            <a th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<footer>
+    <p>&copy; 2024 Product Management System</p>
+</footer>
+</body>
+</html>

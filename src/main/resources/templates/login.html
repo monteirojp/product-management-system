@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Product Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch; /* Faz com que as caixas tenham a mesma altura */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .intro-section, .login-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1; /* Ambas as seções vão ocupar o mesmo espaço */
+        }
+
+        .intro-section {
+            margin-right: 20px;
+        }
+
+        .intro-section h2 {
+            color: #333;
+        }
+
+        .intro-section p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .login-section h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Product Management System</h1>
+</header>
+
+<div class="container">
+    <div class="intro-section">
+        <h2>Welcome to the Product Management System</h2>
+        <p>
+            This system was designed to help manage products efficiently. It allows you to create, edit, and delete products in a user-friendly and easy-to-use interface.
+            Built with the <strong>Spring Framework</strong> and using <strong>Thymeleaf</strong> for rendering the frontend, this application also integrates with a category system for better product organization.
+        </p>
+        <p>
+            Please log in to manage your products and inventory with ease.
+        </p>
+    </div>
+
+    <div class="login-section">
+        <h2>Login</h2>
+        <form th:action="@{/login}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Product Management System</p>
+</footer>
+</body>
+</html>
