@@ -12,7 +12,7 @@ public class DatabaseSeeder {
     @Bean
     CommandLineRunner initDatabase(CategoryRepository categoryRepository) {
         return args -> {
-            if (categoryRepository.count() == 0) { // Verifica se o banco está vazio
+            if (categoryRepository.count() == 0) { 
                 categoryRepository.save(new Category(null, "Electronics", null));
                 categoryRepository.save(new Category(null, "Books", null));
                 categoryRepository.save(new Category(null, "Furniture", null));
