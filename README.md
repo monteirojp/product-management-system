@@ -68,8 +68,6 @@ Make sure you have a PostgreSQL database installed and running. Create a new dat
 
 Update the `application.properties` with your database credentials:
 ```bash
-properties
-
 spring.datasource.url=jdbc:postgresql://localhost:5432/product_management_db
 spring.datasource.username=yourusername
 spring.datasource.password=yourpassword
